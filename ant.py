@@ -1,20 +1,23 @@
 import pygame
 from pygame.locals import *
 import sys
+
 import numpy as np
 import pandas as pd
+
+import sub_ant
 
 def main():
     pygame.init()
 
-    white = (255 ,255 ,255)
-    black = (0 ,0 ,0)
-    (w, h) = (300, 300) #display size
+    white = (255, 255, 255)
+    black = (0, 0, 0)
 
-    (x1, y1) = (w/4, h/4) #position
-    (dx1, dy1) = (1, 0) #direction
+    (w, h) = (200,200)      #display_size
+    (x, y) = (w/2,h/2)      #ant_position
+    (dx, dy) = (1, 0)       #ant_direction
+
     color = white
-
     count = 0
     board = pd.DataFrame(np.zeros((w,h)).astype(np.int))
 
@@ -26,37 +29,11 @@ def main():
 
     while(True):
 
-        rect1 = (x1, y1, 1, 1)
-        rect2 = (100,100,5,5)
-        pygame.draw.rect(screen, color, rect1)
-        pygame.draw.rect(screen, color, rect2)
+        ans = sub_ant.ant_plot(board, w, h, x, y, dx, dy)
+        (board, x, y, dx, dy, color) = ans      #1行でも可
+
+        pygame.draw.rect(screen, color, (x, y, 1, 1))
         pygame.display.update()
-
-        if board.iloc[int(x1),int(y1)] == 0:
-            board.iloc[int(x1),int(y1)] = 1
-            temp = dx1
-            dx1 = -dy1
-            dy1 = temp
-            color = black
-        else:
-            board.iloc[int(x1),int(y1)] = 0
-            temp = dx1
-            dx1 = dy1
-            dy1 = -temp
-            color = white
-
-        if x1 >= w-1:
-            x1 = 1
-        elif x1 <= 0:
-            x1 = w-1
-
-        if y1 >= h-1:
-            y1 = 1
-        elif y1 <= 0:
-            y1 = h-1
-
-        x1 = x1 + dx1
-        y1 = y1 + dy1
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -68,7 +45,7 @@ def main():
                     sys.exit()
 
         count += 1
-        print(count,x1,y1)
+        print(count)
 
 if __name__ == "__main__":
     main()
