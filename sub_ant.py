@@ -16,17 +16,17 @@ def ant_plot(board, w, h, x, y, dx, dy):
         dy = -temp
         color = white
 
-    if x >= w-1:
-        x = 1
-    elif x <= 0:
-        x = w-1
-
-    if y >= h-1:
-        y = 1
-    elif y <= 0:
-        y = h-1
-
     x = x + dx
     y = y + dy
+
+    if x == w:
+        x = 0
+    elif x == -1:
+        x = w - 1
+
+    if y == h:
+        y = 0
+    elif y == -1:
+        y = h - 1
 
     return board,x, y, dx, dy, color

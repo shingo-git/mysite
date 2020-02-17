@@ -19,7 +19,7 @@ def main():
     purple = (128, 0, 128)
 
     #display_size
-    (w, h) = (100,100)
+    (w, h) = (200,200)
 
     #ant_position
     (x1, y1) = (int(w*random.random()),int(h*random.random()))

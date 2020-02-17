@@ -45,7 +45,7 @@ def main():
                     sys.exit()
 
         count += 1
-        print(count)
+        print(count,x,y)
 
 if __name__ == "__main__":
     main()
