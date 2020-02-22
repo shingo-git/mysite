@@ -22,3 +22,6 @@ for i in range(len(lt1)):
             if lt1[j] == lt2[i]:
                 if not lt1[j] == lt2[j]:
                     print(lt1[j],lt2[j])
+
+print(test)
+#test
